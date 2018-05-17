@@ -1,7 +1,8 @@
 import sys
 import os
 from compute import *
-#Vigneswar Mourouguessin - 40057918
+# Vigneswar Mourouguessin - 40057918
+
 
 class Class_grade :
     
@@ -16,6 +17,7 @@ class Class_grade :
             print("welcome")
         
         def __init__(self):
+            # Files to be placed in this path : print(os.getcwd())
             self.A1 = open('a1.txt').read().split("\n")
             self.A2 = open('a2.txt').read().split("\n")
             self.Project = open('project.txt').read().split("\n")
@@ -42,15 +44,16 @@ class Class_grade :
             else:    
                 C.task(user_input, G, C)
             print("\n*** End of task ***")
-            check = int(input("\nDo You Wish to Continue 1-Yes  2-No, Enter 1 or 2:\n"))
-            if(check == 1):
-                G.welcome(G, C)
-                print()
-            else :
-                C.task(6, G, C)
+            G.welcome(G, C)
+            #check = int(input("\nDo You Wish to Continue 1-Yes  2-No, Enter 1 or 2:\n"))
+            #if(check == 1):
+                #G.welcome(G, C)
+                #print()
+            #else :
+            #    C.task(6, G, C)
         
         if __name__ == "__main__":
-            print(os.getcwd())
+            
             print("Welcome")
             
             C = Class_compute()    

@@ -4,7 +4,7 @@ import sys
 import operator
 from grades import *
 
-#Vigneswar Mourouguessin - 40057918
+# Vigneswar Mourouguessin - 40057918
 
 
 class Class_compute:
@@ -16,6 +16,7 @@ class Class_compute:
     dict_file_t2 = {} 
     final_dict = {} 
     final_list = []
+    dict = {}
     
     def function(self):
         print()
@@ -29,6 +30,9 @@ class Class_compute:
         self.dict_file_pr = C.generate(G, C, G.Project)
         self.dict_file_t1 = C.generate(G, C, G.Test1)
         self.dict_file_t2 = C.generate(G, C, G.Test2)
+        self.dict = {}
+        self.final_dict = {} 
+        self.final_list = []
         
         option = 50
         for id in G.dict_file.keys():
@@ -154,12 +158,14 @@ class Class_compute:
         for id in G.dict_file.keys():
             C.getgrade(id, G, C, option)
             
-        C.printGrade()    
+        C.printGrade()   
+        self.final_list = [] 
         # print(C.final_dict)
         
     def printGrade(self):
         # print("ID", '\t', "LN" , '\t', '\t', "FN", '\t', '\t', "A1", '\t', "A2", '\t', "PR", '\t', "T1", '\t', "T2", '\t', "GR", '\t', "FL")
         print("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s" % ("ID", "LN" , "FN", "A1", "A2", "PR", "T1", "T2", "GR", "FL"))
+        
         for val in self.final_dict.keys():
             (id, lname, fname, a1_mks, a2_mks, pr_mks, t1_mks, t2_mks, grade, band) = self.final_dict[val]
             if(a1_mks == 0): 
@@ -261,21 +267,27 @@ class Class_compute:
         order = int(input("Choose sort orders - 1 or 2 :- \n1.LT (last name)  \n2.GR (numeric grade)\n"))
         
         if(order == 1):
-            print("Sorting By Last Name")
+            print("Sorting By Last Name\n")
             C.getSort(G, C, order)
         elif(order == 2):
-            print("Sorting By Numeric Grade")
+            print("Sorting By Numeric Grade\n")
             C.getSort(G, C, order)
         else:
             print("Enter correct option : 1.LT (last name) and 2.GR (numeric grade) : 1 or 2\n")
             C.Sort_alternate_column(G, C)
          
+        self.final_list = []
+        self.final_dict.clear
         # print(self.final_list)    
         # print(self.final_dict)
         
     def getSort(self, G, C, order):
-        dict = {}
+        
         print("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s" % ("ID", "LN" , "FN", "A1", "A2", "PR", "T1", "T2", "GR", "FL"))
+        
+        option = 50
+        for id in G.dict_file.keys():
+            C.getgrade(id, G, C, option)
             
         if(order == 1):
             sort = 'lname'
@@ -324,6 +336,6 @@ class Class_compute:
         
     # Task 6
     def Exit(self):
-        print("Good Bye")    
+        print("Good Bye")
         sys.exit()
         
