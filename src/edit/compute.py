@@ -2,7 +2,6 @@ import sysconfig
 import os
 import sys
 import operator
-import math
 from grades import *
 
 # Vigneswar Mourouguessin - 40057918
@@ -53,10 +52,7 @@ class Class_compute:
                     if(int(temp[0]) == id):
                         sid = id
                         name = G.dict_file[id]
-                        if(temp[1] == ' ') or (not(temp[1])):
-                            mark = 'zero'
-                        else:
-                            mark = temp[1]
+                        mark = temp[1]
                         dict_file_new[int(sid)] = name + "," + mark
         return dict_file_new
     
@@ -83,19 +79,19 @@ class Class_compute:
     def get_input(self, G, C):
         user_input = input("Choose the component name (A1, A2, PR, T1, or T2) :\n")
         if(user_input == "A1") or (user_input == "a1"):
-            print("\nA1" + "  grades  " + G.A1[0])
+            print("\nA1" + " grades " + G.A1[0])
             C.call_print(G, C, G.A1)
         elif(user_input == "A2") or (user_input == "a2"):
-            print("\nA2" + "  grades  " + G.A2[0])
+            print("\nA2" + " grades " + G.A2[0])
             C.call_print(G, C, G.A2)
         elif(user_input == "PR") or (user_input == "pr"):
-            print("\nProject" + "  grades  " + G.Project[0])
+            print("\nProject" + " grades " + G.Project[0])
             C.call_print(G, C, G.Project)
         elif(user_input == "T1") or (user_input == "t1"):
-            print("\nTest1" + "  grades  " + G.Test1[0])
+            print("\nTest1" + " grades " + G.Test1[0])
             C.call_print(G, C, G.Test1)
         elif(user_input == "T2") or (user_input == "t2"):
-            print("\nTest2" + "  grades  " + G.Test2[0])
+            print("\nTest2" + " grades " + G.Test2[0])
             C.call_print(G, C, G.Test2)
         else:
             print("Invalid input enter from choice (A1, A2, PR, T1, or T2) :\n")
@@ -141,8 +137,6 @@ class Class_compute:
             count = count + 1
             number = x.split("|")
             # print(number)
-            if(number[1] == ' ') or (not(number[1])):
-                number[1] = 0
             sum = int(number[1]) + sum
             avg = sum / int(count)
         return round(avg, 2)
@@ -172,15 +166,15 @@ class Class_compute:
         
         for val in sorted(self.final_dict.keys()):
             (id, lname, fname, a1_mks, a2_mks, pr_mks, t1_mks, t2_mks, grade, band) = self.final_dict[val]
-            if(a1_mks == 'zero'): 
+            if(a1_mks == 0): 
                 a1_mks = ' '
-            if(a2_mks == 'zero'): 
+            if(a2_mks == 0): 
                 a2_mks = ' '
-            if(pr_mks == 'zero'): 
+            if(pr_mks == 0): 
                 pr_mks = ' '
-            if(t1_mks == 'zero'): 
+            if(t1_mks == 0): 
                 t1_mks = ' '
-            if(t2_mks == 'zero'): 
+            if(t2_mks == 0): 
                 t2_mks = ' '
             
             print("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s" % (id, lname, fname, a1_mks, a2_mks, pr_mks, t1_mks, t2_mks, grade, band))
@@ -189,10 +183,10 @@ class Class_compute:
         Id = id
         grade = 0
         A1_mks = 0
-        A2_mks = 0
-        T1_mks = 0
-        T2_mks = 0
-        Pr_mks = 0
+        A2_mks=0
+        T1_mks =0
+        T2_mks=0
+        Pr_mks=0
         name = C.get_name(id, G, C, G.dict_file)
         lname = name[0]
         fname = name[1]
@@ -201,34 +195,33 @@ class Class_compute:
         pr_mks = C.getmarks(id, G, C, C.dict_file_pr)
         t1_mks = C.getmarks(id, G, C, C.dict_file_t1)
         t2_mks = C.getmarks(id, G, C, C.dict_file_t2)
-        
-        if(a1_mks == 'zero'):
-            A1_mks = 0   
+        if(a1_mks=='zero'):
+            A1_mks=0   
         else:
-            A1_mks = int(a1_mks)
+            A1_mks = a1_mks
             
-        if(a2_mks == 'zero'):
-            A2_mks = 0
+        if(a2_mks=='zero'):
+            A2_mks=0
         else:
-            A2_mks = int(a2_mks)
+            A2_mks = a2_mks
         
-        if(pr_mks == 'zero'):
-            PR_mks = 0
+        if(pr_mks=='zero'):
+            PR_mks=0
         else:
-            PR_mks = int(pr_mks)
+            PR_mks = pr_mks
         
-        if(t1_mks == 'zero'):
-            T1_mks = 0
+        if(t1_mks=='zero'):
+            T1_mks=0
         else:
-            T1_mks = int(t1_mks)
+            T1_mks = t1_mks
         
-        if(t2_mks == 'zero'):
-            T2_mks = 0
+        if(t2_mks=='zero'):
+            T2_mks=0
         else:
-            T2_mks = int(t2_mks)     
+            T2_mks = t2_mks     
         # print(lname, fname, a1_mks, a2_mks, pr_mks, t1_mks, t2_mks)
         totalmarks = (A1_mks / int(G.A1[0])) * 7.5 + (A2_mks / int(G.A2[0])) * 7.5 + (PR_mks / int(G.Project[0])) * 25 + (T1_mks / int(G.Test1[0])) * 30 + (T2_mks / int(G.Test2[0])) * 30
-        grade = math.floor(totalmarks) 
+        grade = round(totalmarks, 2) 
             
         band = C.computeBand(grade, G, C, option) 
         # print(band)
@@ -259,14 +252,15 @@ class Class_compute:
             return score
         else:
             # return ' '
+            #return 0
             return 'zero'
-    
+            
     def computeBand(self, grade, G, C, flag):
         band = 'F'
         # print(flag)
         
         passval = flag
-        N_factor = math.floor(((100 - passval) / 7))
+        N_factor = round(((100 - passval) / 7), 2)
         # print(N_factor)
         
         C_band = passval + (N_factor * 1)
@@ -300,11 +294,9 @@ class Class_compute:
         
         if(order == 1):
             print("Sorting By Last Name\n")
-            print("Pass/ Fail point : 50")
             C.getSort(G, C, order)
         elif(order == 2):
             print("Sorting By Numeric Grade\n")
-            print("Pass/ Fail point : 50")
             C.getSort(G, C, order)
         else:
             print("Enter correct option : 1.LT (last name) and 2.GR (numeric grade) : 1 or 2\n")
@@ -318,8 +310,7 @@ class Class_compute:
     def getSort(self, G, C, order):
         
         print("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s" % ("ID", "LN" , "FN", "A1", "A2", "PR", "T1", "T2", "GR", "FL"))
-        self.final_list = []
-
+        
         option = 50
         for id in G.dict_file.keys():
             C.getgrade(id, G, C, option)
@@ -346,15 +337,15 @@ class Class_compute:
         t2_mks = dict['t2_mks']
         grade = dict['grade']
         band = dict['band']
-        if(a1_mks == 'zero'): 
+        if(a1_mks == 0): 
             a1_mks = ' '
-        if(a2_mks == 'zero'): 
+        if(a2_mks == 0): 
             a2_mks = ' '
-        if(pr_mks == 'zero'): 
+        if(pr_mks == 0): 
             pr_mks = ' '
-        if(t1_mks == 'zero'): 
+        if(t1_mks == 0): 
             t1_mks = ' '
-        if(t2_mks == 'zero'): 
+        if(t2_mks == 0): 
             t2_mks = ' '
         print("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s" % (id, lname, fname, a1_mks, a2_mks, pr_mks, t1_mks, t2_mks, grade, band))
              
@@ -372,14 +363,5 @@ class Class_compute:
     # Task 6
     def Exit(self):
         print("Good Bye")
-        self.dict_file_a1.clear()
-        self.dict_file_a2.clear()
-        self.dict_file_pr.clear()
-        self.dict_file_t1.clear()
-        self.dict_file_t2.clear()
-        self.final_dict.clear()
-        self.final_list.clear()
-        self.dict.clear()
-        
         sys.exit()
         
