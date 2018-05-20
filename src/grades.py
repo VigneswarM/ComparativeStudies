@@ -27,7 +27,7 @@ class Class_grade :
             with open("class.txt") as f:
                 for line in f:
                    (key, val1, val2) = line.split("|")
-                   self.dict_file[int(key)] = val2[:-1] + "," + val1
+                   self.dict_file[int(key)] = val2[:-1] + ", " + val1
             
         def welcome(self, G, C):
             print("")
@@ -45,22 +45,13 @@ class Class_grade :
                 C.task(user_input, G, C)
             print("\n*** End of task ***")
             G.welcome(G, C)
-            #check = int(input("\nDo You Wish to Continue 1-Yes  2-No, Enter 1 or 2:\n"))
-            #if(check == 1):
-                #G.welcome(G, C)
-                #print()
-            #else :
-            #    C.task(6, G, C)
-        
+            
         if __name__ == "__main__":
             
             print("Welcome")
-            
             C = Class_compute()    
             G = Class_grade()
             obj = Class_grade()
-            
             C.checking(G, C)
-            
             obj.welcome(G, C)
             
