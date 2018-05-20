@@ -52,7 +52,10 @@ class Class_compute:
                     if(int(temp[0]) == id):
                         sid = id
                         name = G.dict_file[id]
-                        mark = temp[1]
+                        if(temp[1] == ' ') or (not(temp[1])):
+                            mark = 'zero'
+                        else:
+                            mark = temp[1]
                         dict_file_new[int(sid)] = name + "," + mark
         return dict_file_new
     
@@ -137,7 +140,7 @@ class Class_compute:
             count = count + 1
             number = x.split("|")
             # print(number)
-            if(number[1] == ' '):
+            if(number[1] == ' ') or (not(number[1])):
                 number[1] = 0
             sum = int(number[1]) + sum
             avg = sum / int(count)
@@ -368,5 +371,14 @@ class Class_compute:
     # Task 6
     def Exit(self):
         print("Good Bye")
+        self.dict_file_a1.clear()
+        self.dict_file_a2.clear()
+        self.dict_file_pr.clear()
+        self.dict_file_t1.clear()
+        self.dict_file_t2.clear()
+        self.final_dict.clear()
+        self.final_list.clear()
+        self.dict.clear()
+        
         sys.exit()
         
