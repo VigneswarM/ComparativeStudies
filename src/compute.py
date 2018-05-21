@@ -84,35 +84,34 @@ class Class_compute:
         user_input = input("Choose the component name (A1, A2, PR, T1, or T2) :\n")
         if(user_input == "A1") or (user_input == "a1"):
             print("\nA1" + "  grades  " + G.A1[0])
-            C.call_print(G, C, G.A1)
+            C.calling_print(G, C, self.dict_file_a1)
         elif(user_input == "A2") or (user_input == "a2"):
             print("\nA2" + "  grades  " + G.A2[0])
-            C.call_print(G, C, G.A2)
+            C.calling_print(G, C, self.dict_file_a2)
         elif(user_input == "PR") or (user_input == "pr"):
             print("\nProject" + "  grades  " + G.Project[0])
-            C.call_print(G, C, G.Project)
+            C.calling_print(G, C, self.dict_file_pr)
         elif(user_input == "T1") or (user_input == "t1"):
             print("\nTest1" + "  grades  " + G.Test1[0])
-            C.call_print(G, C, G.Test1)
+            C.calling_print(G, C, self.dict_file_t1)
         elif(user_input == "T2") or (user_input == "t2"):
             print("\nTest2" + "  grades  " + G.Test2[0])
-            C.call_print(G, C, G.Test2)
+            C.calling_print(G, C, self.dict_file_t2)
         else:
-            print("Invalid input enter from choice (A1, A2, PR, T1, or T2) :\n")
+            print("Invalid input ")
             C.get_input(G, C)
     
-    def call_print(self, G, C, mylist=[]):
-        dict_file_new = {}       
-        for id in G.dict_file.keys():
-                for x in mylist[1:]:
-                    temp = x.split("|")
-                    if(int(temp[0]) == id):
-                        sid = id
-                        name = G.dict_file[id]
-                        mark = temp[1]
-                        # print(sid, '\t', name, '\t','\t', mark)
-                        print("%-10s %-20s %-10s" % (sid, name, mark))
-                        dict_file_new[int(sid)] = name + "," + mark
+    def calling_print(self, G, C, mydict={}):                    
+         for id in sorted(G.dict_file.keys()):
+            sid = id
+            name = G.dict_file[id]
+            if sid in mydict.keys():
+                value = mydict[id]
+                (lastname, firstname, mark) = value.split(",")
+                print("%-10s %-20s %-10s" % (sid, name, mark))
+            else:
+                mark = ' '
+                print("%-10s %-20s %-10s" % (sid, name, mark))
          
     # task 2  
     def Display_component_average(self, G, C):
@@ -121,24 +120,24 @@ class Class_compute:
     def get_input_avg(self, G, C):
         user_input = input("Choose the component name (A1, A2, PR, T1, or T2) :\n")
         if(user_input == "A1") or (user_input == "a1"):
-            print("\nA1 average", C.getavg(G.A1), "/", G.A1[0])
+            print("\nA1 average", C.getavg(G, C, G.A1), "/", G.A1[0])
         elif(user_input == "A2") or (user_input == "a2"):
-            print("\nA2 average", C.getavg(G.A2), "/", G.A2[0])
+            print("\nA2 average", C.getavg(G, C, G.A2), "/", G.A2[0])
         elif(user_input == "PR") or (user_input == "pr"):
-            print("\nProject average", C.getavg(G.Project), "/", G.Project[0])
+            print("\nProject average", C.getavg(G, C, G.Project), "/", G.Project[0])
         elif(user_input == "T1") or (user_input == "t1"):
-            print("\nT1 average", C.getavg(G.Test1), "/", G.Test1[0])
+            print("\nT1 average", C.getavg(G, C, G.Test1), "/", G.Test1[0])
         elif(user_input == "T2") or (user_input == "t2"):
-            print("\nT2 average", C.getavg(G.Test2), "/", G.Test2[0])
+            print("\nT2 average", C.getavg(G, C, G.Test2), "/", G.Test2[0])
         else:
             print("Invalid input enter from choice (A1, A2, PR, T1, or T2) :\n")
             C.get_input_avg(G, C)
     
-    def getavg(self, temp=[]):
+    def getavg(self, G, C, temp=[]):
         sum = 0
-        count = 0
+        count = len(G.dict_file)
+        # print(count)
         for x in temp[1:]:
-            count = count + 1
             number = x.split("|")
             # print(number)
             if(number[1] == ' ') or (not(number[1])):

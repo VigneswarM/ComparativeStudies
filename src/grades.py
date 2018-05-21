@@ -40,7 +40,8 @@ class Class_grade :
             user_input = int(input("\nselect your option in numbers (1-6) :\n"))
                        
             if (user_input <= 0) or (user_input > 6)  :
-                user_input = int(input("Wrong option - select option between (1-6) :"))
+                print("Wrong option - select option between (1-6) :")
+                G.welcome(G, C)
             else:    
                 C.task(user_input, G, C)
             print("\n*** End of task ***")
